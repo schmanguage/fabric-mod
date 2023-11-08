@@ -27,4 +27,4 @@ jobs:
         with:
           modrinth-id: nil6AB6l
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          github-token: $${ secrets.GITHUB_TOKEN }
+          github-token: ${{ secrets.GITHUB_TOKEN }}
