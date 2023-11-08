@@ -32,4 +32,4 @@ jobs:
         with:
           modrinth-id: FGWvEfgd
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          version-type: alpha
+          github-token: $${ secrets.GITHUB_TOKEN }
