@@ -30,6 +30,6 @@ jobs:
         if: ${{ runner.os == 'Linux' && matrix.java == '17' }} # Only publish artifacts built from latest java on one OS
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          modrinth-id: FGWvEfgd
+          modrinth-id: nil6AB6l
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           github-token: $${ secrets.GITHUB_TOKEN }
