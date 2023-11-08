@@ -3,11 +3,8 @@
   "minVersion": "0.8",
   "package": "com.tomate.schmoahify.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "LiteralContentsMixin"
-  ],
-  "client": [
-  ],
+  "mixins": ["LiteralContentsMixin"],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }
