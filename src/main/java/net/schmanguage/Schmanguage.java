@@ -1,4 +1,4 @@
-package com.tomate.schmoahify;
+package net.schmanguage;
 
 import java.util.Arrays;
 

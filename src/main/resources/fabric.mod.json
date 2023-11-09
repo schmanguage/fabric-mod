@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "id": "schmoahify",
+  "id": "schmanguage",
   "version": "${version}",
 
-  "name": "Schmoahify",
+  "name": "Schmanguage",
   "description": "",
   "authors": [],
   "contact": {},
 
   "license": "MIT",
-  "icon": "assets/schmoahify/icon.png",
+  "icon": "assets/schmanguage/icon.png",
 
   "environment": "client",
-  "mixins": ["schmoahify.mixins.json"],
+  "mixins": ["schmanguage.mixins.json"],
 
   "depends": {
     "fabricloader": ">=${loader_version}",
