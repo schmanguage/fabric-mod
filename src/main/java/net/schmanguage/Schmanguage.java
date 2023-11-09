@@ -1,50 +1,49 @@
 package net.schmanguage;
 
-import java.util.Arrays;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Schmanguage {
+    private static final Pattern PATTERN = Pattern.compile("(§[0-9a-fklmnor]|\\b)([b-df-hj-np-tv-xz]*[aeiouy])(\\w*)\\b", Pattern.CASE_INSENSITIVE);
+
     public static String translate(String text) {
-        if(text.trim().length() < 2)
+        if (text.trim().length() < 2)
             return text;
 
-        var words = text.split(" ");
+        Matcher matcher = PATTERN.matcher(text);
+        if (!matcher.find()) {
+            return text;
+        }
 
-        var modifiedWords = Arrays.stream(words).map((word) -> {
-            if (word.length() < 2)
-                return word;
-
-            var uppercaseWord = word.toUpperCase();
-
-            // Check if the word is an actual word
-            if(!word.matches("[a-zA-Zöäü]+"))
-                return word;
-
-            var isUppercase = word.equals(uppercaseWord);
-
-            // Is the first letter uppercase?
-            if (uppercaseWord.charAt(0) != word.charAt(0))
-                return word;
-
-            var modifiedWord = word;
-            while(!startsWithVowel(modifiedWord) && modifiedWord.length() > 2) {
-                modifiedWord = modifiedWord.substring(1);
+        StringBuilder result = new StringBuilder();
+        do {
+            String word = modifyWord(matcher.group(2), isUpperCase(matcher.group(2)+matcher.group(3)));
+            if ((word+matcher.group(3)).length() <= 5) {
+                continue;
             }
+            matcher.appendReplacement(result, "$1" + word + "$3");
+        } while (matcher.find());
+        matcher.appendTail(result);
 
-            if(modifiedWord.length() == 2)
-                return word;
-
-            if(isUppercase)
-                return "SCHM" + modifiedWord;
-
-            String modifiedWordWithFirstLetterLowercase = Character.toLowerCase(modifiedWord.charAt(0)) + modifiedWord.substring(1);
-            return "Schm" + modifiedWordWithFirstLetterLowercase;
-        });
-
-        // Join words together again
-        return modifiedWords.reduce((word1, word2) -> word1 + " " + word2).orElse("");
+        return result.toString();
     }
 
-    private static boolean startsWithVowel(String string) {
-        return "AEIOUaeiou".indexOf(string.charAt(0)) != -1;
+    private static String modifyWord(String word, boolean isUpperCase) {
+        if (Character.isLowerCase(word.charAt(0))) {
+            return word;
+        }
+
+        char vowel = word.charAt(word.length()-1);
+        if (isUpperCase) {
+            return "SCHM" + vowel;
+        }
+        return "Schm" + Character.toLowerCase(vowel);
+    }
+
+    private static boolean isUpperCase(String s) {
+        return s.toUpperCase().equals(s);
     }
 }
