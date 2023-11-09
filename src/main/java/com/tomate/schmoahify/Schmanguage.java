@@ -14,10 +14,9 @@ public class Schmanguage {
                 return word;
 
             var uppercaseWord = word.toUpperCase();
-            var lowercaseWord = word.toLowerCase();
 
             // Check if the word is an actual word
-            if(uppercaseWord.equals(lowercaseWord))
+            if(!word.matches("[a-zA-Zöäü]+"))
                 return word;
 
             var isUppercase = word.equals(uppercaseWord);
