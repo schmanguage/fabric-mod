@@ -22,6 +22,8 @@ public abstract class ClientLanguageMixin {
 
     @Redirect(method = "loadFrom", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/resources/language/ClientLanguage;appendFrom(Ljava/lang/String;Ljava/util/List;Ljava/util/Map;)V"))
     private static void appendFrom(String languageIdentifier, List<Resource> resourceStack, Map<String, String> map) {
+        Schmanguage.isEnabled = languageIdentifier.equals("en_schm");
+
         for (Resource resource : resourceStack) {
             try {
                 try (InputStream inputStream = resource.open()) {

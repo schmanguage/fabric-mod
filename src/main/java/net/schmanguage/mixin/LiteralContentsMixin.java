@@ -14,6 +14,7 @@ public class LiteralContentsMixin {
 
     @Inject(at = @At("RETURN"), method = "<init>")
     void text(String text, CallbackInfo ci) {
-        this.text = Schmanguage.translate(text);
+        if(Schmanguage.isEnabled)
+            this.text = Schmanguage.translate(text);
     }
 }

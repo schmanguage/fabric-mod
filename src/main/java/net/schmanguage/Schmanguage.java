@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 public class Schmanguage implements ModInitializer {
     public static Set<String> languageKeys = new CopyOnWriteArraySet<>();
+    public static boolean isEnabled = false;
     private static final Pattern PATTERN = Pattern.compile("(§[0-9a-fklmnor]|\\b)([b-df-hj-np-tv-xz]*[aeiouy])(\\w*)\\b", Pattern.CASE_INSENSITIVE);
 
     public static String translate(String text) {

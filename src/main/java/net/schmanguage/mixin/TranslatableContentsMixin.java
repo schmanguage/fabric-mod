@@ -2,7 +2,6 @@ package net.schmanguage.mixin;
 
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.schmanguage.Schmanguage;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,7 +15,7 @@ public abstract class TranslatableContentsMixin {
 
     @ModifyVariable(method = "decompose", at = @At(value = "STORE", ordinal = 0), ordinal = 0)
     String translate(String string) {
-        if(Schmanguage.languageKeys.contains(this.key))
+        if(Schmanguage.languageKeys.contains(this.key) || !Schmanguage.isEnabled)
             return string;
 
         return Schmanguage.translate(string);
