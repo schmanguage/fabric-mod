@@ -1,0 +1,13 @@
+{
+  "pack": {
+    "pack_format": 18,
+    "description": "Schmanguage Pack §6v0.5\n§cBy Kesuaheli"
+  },
+  "language": {
+    "en_schm": {
+      "name": "Schmenglish",
+      "region": "Schmanguage",
+      "bidirectional": false
+    }
+  }
+}

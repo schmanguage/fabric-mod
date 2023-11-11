@@ -1,11 +1,18 @@
 package net.schmanguage;
 
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Schmanguage {
+public class Schmanguage implements ModInitializer {
     public static Set<String> languageKeys = new CopyOnWriteArraySet<>();
     private static final Pattern PATTERN = Pattern.compile("(§[0-9a-fklmnor]|\\b)([b-df-hj-np-tv-xz]*[aeiouy])(\\w*)\\b", Pattern.CASE_INSENSITIVE);
 
@@ -45,5 +52,10 @@ public class Schmanguage {
 
     private static boolean isUpperCase(String s) {
         return s.toUpperCase().equals(s);
+    }
+
+    @Override
+    public void onInitialize() {
+        FabricLoader.getInstance().getModContainer("schmanguage").ifPresent(modContainer -> ResourceManagerHelper.registerBuiltinResourcePack(new ResourceLocation("schmanguage", "schmanguage"), modContainer, Component.literal("Schmanguage"), ResourcePackActivationType.ALWAYS_ENABLED));
     }
 }
