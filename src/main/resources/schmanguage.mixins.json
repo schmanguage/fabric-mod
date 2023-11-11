@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "net.schmanguage.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": ["LiteralContentsMixin"],
+  "mixins": ["LiteralContentsMixin", "TranslatableContentsMixin", "ClientLanguageMixin"],
   "client": [],
   "injectors": {
     "defaultRequire": 1
