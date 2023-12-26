@@ -8,7 +8,7 @@ Example:
  - ~~L~~<u>a</u>nguage → **Schm**<u>a</u>nguage
  - ~~F~~<u>a</u>bric mod → **Schm**<u>a</u>bric mod
 
- You can download this mod [here](https://modrinth.com/mod/schmanguage)
+ You can download this mod [here](https://modrinth.com/mod/schmanguage-mod)
 
 ## Credits
 
