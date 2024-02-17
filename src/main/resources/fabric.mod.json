@@ -20,7 +20,7 @@
 
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "minecraft": "1.20.x",
+    "minecraft": "${minecraft_version}",
     "fabric": "*"
   }
 }
