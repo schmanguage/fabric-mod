@@ -13,6 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Schmanguage implements ModInitializer {
+    public static final String MOD_ID = "schmanguage";
+
     public static Set<String> languageKeys = new CopyOnWriteArraySet<>();
     public static boolean isEnabled = false;
     private static final Pattern PATTERN = Pattern.compile("(§[0-9a-fklmnor]|\\b)([b-df-hj-np-tv-xz]*[aeiouy])(\\w*)\\b", Pattern.CASE_INSENSITIVE);
@@ -28,8 +30,8 @@ public class Schmanguage implements ModInitializer {
 
         StringBuilder result = new StringBuilder();
         do {
-            String word = modifyWord(matcher.group(2), isUpperCase(matcher.group(2)+matcher.group(3)));
-            if ((word+matcher.group(3)).length() <= 5) {
+            String word = modifyWord(matcher.group(2), isUpperCase(matcher.group(2) + matcher.group(3)));
+            if ((word + matcher.group(3)).length() <= 5) {
                 continue;
             }
             matcher.appendReplacement(result, "$1" + word + "$3");
@@ -44,7 +46,7 @@ public class Schmanguage implements ModInitializer {
             return word;
         }
 
-        char vowel = word.charAt(word.length()-1);
+        char vowel = word.charAt(word.length() - 1);
         if (isUpperCase) {
             return "SCHM" + vowel;
         }
@@ -57,6 +59,10 @@ public class Schmanguage implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        FabricLoader.getInstance().getModContainer("schmanguage").ifPresent(modContainer -> ResourceManagerHelper.registerBuiltinResourcePack(new ResourceLocation("schmanguage", "schmanguage"), modContainer, Component.literal("Schmanguage"), ResourcePackActivationType.ALWAYS_ENABLED));
+        FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer -> ResourceManagerHelper.registerBuiltinResourcePack(id(MOD_ID), modContainer, Component.literal("Schmanguage"), ResourcePackActivationType.ALWAYS_ENABLED));
+    }
+
+    public static ResourceLocation id(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }
