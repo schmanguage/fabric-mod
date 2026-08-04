@@ -18,24 +18,27 @@ import java.util.Map;
 
 @Mixin(ClientLanguage.class)
 public abstract class ClientLanguageMixin {
-    @Shadow @Final private static Logger LOGGER;
+    @Shadow
+    @Final
+    private static Logger LOGGER;
 
     @Redirect(method = "loadFrom", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/resources/language/ClientLanguage;appendFrom(Ljava/lang/String;Ljava/util/List;Ljava/util/Map;)V"))
-    private static void appendFrom(String languageIdentifier, List<Resource> resourceStack, Map<String, String> map) {
-        Schmanguage.isEnabled = languageIdentifier.equals("en_schm");
+    private static void appendFrom(String languageCode, List<Resource> resources, Map<String, String> translations) {
+        Schmanguage.isEnabled = languageCode.equals("en_schm");
 
-        for (Resource resource : resourceStack) {
+        for (Resource resource : resources) {
             try {
                 try (InputStream inputStream = resource.open()) {
                     Language.loadFromJson(inputStream, (key, value) -> {
-                        if(languageIdentifier.equals("en_schm"))
+                        if (languageCode.equals("en_schm")) {
                             Schmanguage.languageKeys.add(key);
+                        }
 
-                        map.put(key, value);
+                        translations.put(key, value);
                     });
                 }
             } catch (IOException iOException) {
-                LOGGER.warn("Failed to load translations for {} from pack {}", languageIdentifier, resource.sourcePackId(), iOException);
+                LOGGER.warn("Failed to load translations for {} from pack {}", languageCode, resource.sourcePackId(), iOException);
             }
         }
     }

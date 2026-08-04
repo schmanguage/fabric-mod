@@ -10,14 +10,17 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(TranslatableContents.class)
 public abstract class TranslatableContentsMixin {
-    @Shadow @Final private String key;
+    @Shadow
+    @Final
+    private String key;
 
 
-    @ModifyVariable(method = "decompose", at = @At(value = "STORE", ordinal = 0), ordinal = 0)
-    String translate(String string) {
-        if(Schmanguage.languageKeys.contains(this.key) || !Schmanguage.isEnabled)
-            return string;
+    @ModifyVariable(method = "decompose", at = @At(value = "STORE", ordinal = 0), name = "format")
+    String translate(String format) {
+        if (Schmanguage.languageKeys.contains(this.key) || !Schmanguage.isEnabled) {
+            return format;
+        }
 
-        return Schmanguage.translate(string);
+        return Schmanguage.translate(format);
     }
 }
